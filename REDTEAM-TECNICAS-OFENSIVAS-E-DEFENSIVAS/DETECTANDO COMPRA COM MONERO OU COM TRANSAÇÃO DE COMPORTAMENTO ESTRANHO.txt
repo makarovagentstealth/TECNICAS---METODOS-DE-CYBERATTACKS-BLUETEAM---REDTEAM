@@ -1,0 +1,108 @@
+### Relatório Técnico: Ferramenta de "Captura de Compra com Monero ou Transação de Natureza Anônima Eliminando a Fonte de Compra Anormal ou Desconhecida"
+
+#### Introdução
+
+Este relatório descreve o desenvolvimento de uma ferramenta de monitoramento e detecção de transações realizadas com Monero (XMR) ou outros métodos de transação anônima, focando em capturar atividades suspeitas que ocorram em websites. A ferramenta é baseada em técnicas de engenharia matemática aplicadas ao comportamento de hardware e padrões de tráfego de rede, explorando a falta de protocolos de autenticação e confirmação que caracterizam essas transações. O objetivo é identificar, de forma automatizada, essas transações e emitir alertas, propondo o uso de hardware autônomo (como Arduino ou Raspberry Pi) para realizar transações seguras e não rastreáveis.
+
+#### 1. Descrição da Ferramenta
+
+A ferramenta proposta, chamada de **"Captura de Compra com Monero ou Transação de Natureza Anônima Eliminando a Fonte de Compra Anormal ou Desconhecida"**, funciona através do monitoramento contínuo de tráfego de rede em uma janela de 24 horas, dividida em 12 segmentos de 2 horas. Em cada segmento, a ferramenta analisa o comportamento de diferentes domínios de websites, verificando se ocorrem transações que apresentam características típicas de compras anônimas, como a ausência de autenticação padrão e a falta de confirmação de transação.
+
+#### 2. Metodologia
+
+##### 2.1 Divisão Temporal e Monitoramento de Domínios
+
+O dia é dividido em 12 pedaços de 2 horas, durante os quais a ferramenta monitora os seguintes aspectos:
+- **Domínio do Website**: Identificação do domínio onde a compra está sendo feita.
+- **Assinatura de Hardware**: Comportamento do hardware (CPU, memória, uso de disco) associado ao processo de compra.
+- **Análise de Padrões de Tráfego**: Observação do padrão de tráfego que não segue os protocolos HTTPS/HTTP tradicionais.
+
+##### 2.2 Engenharia Matemática Aplicada
+
+A engenharia matemática é aplicada para detectar anomalias nos padrões de tráfego e comportamento do hardware. A ferramenta utiliza algoritmos de machine learning treinados para identificar características incomuns, como a falta de protocolos de autenticação e padrões típicos de transações anônimas.
+
+##### 2.3 Rotores de Engenharia Matemática
+
+Os rotores de engenharia matemática são componentes do sistema que processam os dados em tempo real, comparando as transações observadas com um banco de dados de padrões conhecidos de transações anônimas, especialmente as realizadas com Monero.
+
+##### 2.4 Detecção de Transações Suspeitas
+
+Quando uma transação é detectada em um domínio conhecido por aceitar Monero ou outro método de pagamento anônimo, e se ela ocorre em um momento em que o padrão de comportamento do hardware e da rede se alinha com os padrões de transações anônimas, a ferramenta emite um alerta. Esse alerta sinaliza a possível compra com Monero.
+
+#### 3. Implementação
+
+O código a seguir ilustra a implementação da ferramenta. Ele utiliza uma combinação de scripts em Python para monitoramento de rede e análise de dados.
+
+```python
+import time
+import numpy as np
+from datetime import datetime
+from scapy.all import sniff, IP
+from collections import defaultdict
+
+# Inicializa o dicionário de logs
+log_data = defaultdict(list)
+
+# Função para detectar padrões de tráfego suspeitos
+def detectar_padroes_suspeitos(packet):
+    # Verifica se o pacote é HTTP ou HTTPS
+    if packet.haslayer(IP):
+        src_ip = packet[IP].src
+        dst_ip = packet[IP].dst
+        timestamp = datetime.now()
+        
+        # Log de comportamento de hardware simulado
+        hardware_behavior = np.random.normal(loc=0.5, scale=0.1, size=1)[0]
+        
+        # Simulação de domínio suspeito
+        domain_suspeito = "exemplo.com"
+        
+        # Verifica se o padrão de tráfego é suspeito
+        if dst_ip == domain_suspeito and hardware_behavior < 0.4:
+            log_data[dst_ip].append({
+                'timestamp': timestamp,
+                'src_ip': src_ip,
+                'hardware_behavior': hardware_behavior
+            })
+            print(f"Alerta: Padrão suspeito detectado em {dst_ip} às {timestamp}")
+
+# Função de monitoramento contínuo
+def monitorar_trafego():
+    while True:
+        # Monitora a rede por 2 horas
+        for _ in range(7200):
+            sniff(prn=detectar_padroes_suspeitos, filter="ip", store=0)
+        time.sleep(7200)  # Pausa por 2 horas antes de iniciar o próximo segmento
+
+# Função principal
+def main():
+    print("Iniciando monitoramento de tráfego...")
+    monitorar_trafego()
+
+if __name__ == "__main__":
+    main()
+```
+
+#### 4. Sugestões de Melhorias e Segurança
+
+Para aumentar a segurança nas transações anônimas, recomenda-se o uso de hardware autônomo, como Arduino ou Raspberry Pi. Esses dispositivos, quando configurados adequadamente, podem realizar transações sem deixar rastros digitais típicos de computadores comuns, tornando a detecção muito mais difícil.
+
+Além disso, é recomendável implementar criptografia personalizada e redes privadas virtuais (VPNs) em dispositivos autônomos, reforçando ainda mais a privacidade e segurança.
+
+#### 5. Conclusão
+
+A ferramenta desenvolvida é um passo importante para a detecção de transações anônimas em tempo real, utilizando técnicas avançadas de engenharia matemática e monitoramento de hardware. Embora o código apresentado seja básico, ele serve como uma base para futuras implementações mais robustas. A segurança em transações anônimas pode ser significativamente aumentada com o uso de hardware autônomo, que dificulta ainda mais a detecção por algoritmos tradicionais de monitoramento de rede.
+
+___________________________________________________________________###__________________________
+
+https://renan21002200.wixsite.com/renansantoscyberseo
+
+https://counterintelligencecoursescybernetics.wordpress.com/
+
+https://cyberwarfarecounterintelligence.wordpress.com/
+
+https://cyberaptsecurity.wordpress.com/
+
+https://darkstrikaptevilcorpcounterintelligency.wordpress.com/
+
+https://safehousessecurity.wordpress.com/
